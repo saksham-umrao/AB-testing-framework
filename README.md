@@ -127,6 +127,7 @@ The framework includes:
 ### Conversion Rate Comparison
 
 * Bar chart comparing treatment and control conversion rates.
+![Conversion Rate Comparison](plots/Conversion_rate_comparison.png)
 
 ### Confidence Interval Visualization
 
@@ -136,11 +137,13 @@ The framework includes:
   * Lower confidence bound
   * Estimated lift
   * Upper confidence bound
+![Confidence Interval](plots/Confidence_interval_visualization.png)
 
 ### Power Curve
 
 * Estimated statistical power plotted against sample size.
 * Generated using Monte Carlo simulation.
+![Power Curve](plots/Power_curve.png)
 
 ---
 
