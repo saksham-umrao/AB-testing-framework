@@ -51,8 +51,8 @@ def plot_confidence_interval_visualizations(lower_bound:float,
 
     # Plot2: Sampling Distribution
 
-    x=np.linspace(start=-4.5*standard_error,
-                  stop=4.5*standard_error,
+    x=np.linspace(start= -upper_bound-0.035,
+                  stop=upper_bound+0.035,
                   num=1000)
     
     distribution = NormalDist(mu=estimate, sigma=standard_error)
