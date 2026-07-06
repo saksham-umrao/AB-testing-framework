@@ -4,8 +4,10 @@ import visualization
 import math
 
 st.title("📊 A/B Testing Dashboard")
+st.markdown("---")
 
-st.write("Enter experiment parameters below:")
+with st.container():
+    st.header("Experiment Inputs")
 
 col1, col2 = st.columns([1,1])
 with col1:
@@ -17,14 +19,20 @@ with col2:
 
 st.space()
 
-col1, col2, col3, col4 = st.columns([1,1,1,1])
+st.text("For confidence interval and hypothesis tesing.")
+col1, col2, col3 = st.columns([1,1,1])
 with col1:
     confidence_level = st.number_input("Confidence Level", min_value=0.01, max_value=0.99, value=0.95, step=0.01, format="%.2f")
-with col2:
+
+st.text("For power anaylsis(Required sample size)")
+col1, col2, col3= st.columns([1,1,1])
+# with col1:
+#     confidence_level = st.number_input("Confidence Level", min_value=0.01, max_value=0.99, value=0.95, step=0.01, format="%.2f")
+with col1:
     minimum_detectable_effect = st.number_input("Minimum Detectable Effect", min_value=0.001, value=0.020, step=0.001, format="%.3f")
-with col3:    
+with col2:    
     alpha = st.number_input("Alpha", min_value=0.01, max_value=0.99, value=0.05, step=0.01, format="%.2f")
-with col4:
+with col3:
     power = st.number_input("Power", min_value=0.01, max_value=0.99, value=0.80, step=0.01, format="%.2f")
 
 exp = Experiment(treatment_conversions=treatment_conversions,
@@ -32,14 +40,18 @@ exp = Experiment(treatment_conversions=treatment_conversions,
                  control_conversions=control_conversions,
                  control_size=control_size)
 
-if st.button("Run Experiment"):
-    st.session_state.show_report = True
-if st.session_state.get("show_report", False):
-    st.subheader("Results")
-    st.code(exp.print_report(confidence_level, minimum_detectable_effect, alpha, power), language=None)
+with st.container():
+    st.header("Run Experiment")
 
-st.subheader("Visualizations:")
-st.write("Please select the plots that you want to see:")
+    if st.button("Run Experiment"):
+        st.session_state.show_report = True
+
+    if st.session_state.get("show_report", False):
+        st.code(exp.print_report(confidence_level, minimum_detectable_effect, alpha, power), language=None)
+
+with st.container():
+    st.header("📈 Visualizations")
+    st.write("Please select the plots that you want to see:")
 conversion_rate_plot = st.checkbox("Conversion Rate Comparison")
 confidence_interval_plot = st.checkbox("Confidence Interval Visualization")
 power_curve_plot = st.checkbox("Power Curve")
