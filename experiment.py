@@ -86,3 +86,24 @@ class Experiment:
             f"({report['confidence_interval'][0]:.4f}, "
             f"{report['confidence_interval'][1]:.4f})"
         )
+    
+    def print_report(self, confidence_level=0.95, minimum_detectable_effect=0.02, alpha=0.05, power=0.80):
+        """Returns a formatted A/B test summary using custom analysis parameters."""
+        report = self.generate_report(confidence_level, minimum_detectable_effect, alpha, power)
+
+        return (
+            f"A/B Test Summary\n"
+            f"-----------------\n"
+            f"Control Conversion Rate   : {report['control_conversion_rate']:.4f}\n"
+            f"Treatment Conversion Rate : {report['treatment_conversion_rate']:.4f}\n"
+            f"Absolute Lift             : {report['absolute_lift']:.4f}\n"
+            f"Relative Lift             : {report['relative_lift']:.2%}\n"
+            f"Required Sample Size      : {report['required_sample_size']}\n"
+            f"Z Statistic               : {report['z_statistic']:.4f}\n"
+            f"Z Critical                : {report['z_critical']:.4f}\n"
+            f"P Value                   : {report['p_value']:.4f}\n"
+            f"Reject Null               : {report['reject_null']}\n"
+            f"Confidence Interval       : "
+            f"({report['confidence_interval'][0]:.4f}, "
+            f"{report['confidence_interval'][1]:.4f})"
+        )
